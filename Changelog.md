@@ -1,5 +1,35 @@
 # Changelog
 
+## v3.0.0
+- **Breaking Change**: All LiteBus assemblies are now strong-named to support usage in enterprise applications and projects that require signed dependencies. This is a breaking change that requires a major version update.
+
+## v2.2.3
+
+- **Fixed**: Remove extra DI container registration
+
+
+## v2.2.2
+
+- **Fixed**: DI container registration now properly filters out interfaces and abstract classes during service registration. Previously, `RegisterFromAssembly()` would cause DI container errors when trying to register non-instantiable types. LiteBus message registry continues to accept all types to support polymorphic dispatch, but only concrete classes are registered with the DI container.
+
+## v2.2.1
+
+- **Fixed**: Support for record structs as message types (commands, queries, events). Previously record structs couldn't
+  be registered due to a type filtering condition that only allowed class types.
+- **Improved**: Message registration to handle all non-System types, allowing for greater flexibility in message
+  definitions.
+
+## v2.2.0
+
+- **Added**: Support for incremental registration allowing for breaking down LiteBus configuration in different parts of
+  the application.
+
+## v2.1.0
+
+- **Added**: .NET 9 support while maintaining backward compatibility with .NET 8
+- **Updated**: All dependencies to their latest .NET 9 compatible versions
+- **Improved**: Multi-targeting build process for both .NET 8 and .NET 9
+
 ## v2.0.0
 
 - **Breaking Change**: Removed nullable annotations from mediator interfaces. Nullability should now be expressed in
@@ -161,7 +191,6 @@
 - Removed methods `RegisterPreHandler`, `RegisterHandler`, and `RegisterPostHandler`, replacing them with `Register`.
 - Removed superfluous base interfaces.
 
-~~~~
 ## v0.12.0
 
 - Added support to message registry for registering any class type as a message.
